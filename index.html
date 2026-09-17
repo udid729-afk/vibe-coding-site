@@ -461,26 +461,201 @@
         }
 
         .ai-logo {
-            width: 55px;
-            height: 55px;
-
-            border-radius: 15px;
-
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 25px;
-            font-weight: 900;
-
+            position: relative;
+            overflow: hidden;
             margin-bottom: 18px;
-
             background:
-                linear-gradient(
-                    135deg,
-                    #7c3aed,
-                    #06b6d4
-                );
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 30%),
+                linear-gradient(135deg, #7c3aed, #06b6d4);
+            border: 1px solid rgba(255,255,255,.14);
+            box-shadow:
+                0 10px 30px rgba(6,182,212,.16),
+                0 0 25px rgba(124,58,237,.12);
+            animation: avatarFloat 4s ease-in-out infinite;
+            transition: transform .4s ease, box-shadow .4s ease;
+        }
+
+        .ai-logo::before {
+            content: "";
+            position: absolute;
+            inset: -70%;
+            background: linear-gradient(
+                120deg,
+                transparent 42%,
+                rgba(255,255,255,.38) 50%,
+                transparent 58%
+            );
+            transform: translateX(-55%) rotate(15deg);
+            animation: avatarShine 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .ai-logo img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 7px var(--avatar-glow, rgba(255,255,255,.45)));
+            transition: transform .4s ease, filter .4s ease;
+        }
+
+        /* Individual brand colors for the animated avatars */
+        .ai-logo[data-ai="ChatGPT"] {
+            --avatar-glow: rgba(16, 163, 127, .75);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #10a37f, #087f68);
+        }
+
+        .ai-logo[data-ai="Claude"] {
+            --avatar-glow: rgba(217, 119, 86, .78);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #d97756, #9e4f3a);
+        }
+
+        .ai-logo[data-ai="Gemini"] {
+            --avatar-glow: rgba(66, 133, 244, .80);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #4285f4, #8e63ff);
+        }
+
+        .ai-logo[data-ai="GitHub Copilot"] {
+            --avatar-glow: rgba(255,255,255,.65);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #24292f, #57606a);
+        }
+
+        .ai-logo[data-ai="Cursor"] {
+            --avatar-glow: rgba(255,255,255,.72);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #111827, #4b5563);
+        }
+
+        .ai-logo[data-ai="Rosebud AI"] {
+            --avatar-glow: rgba(255, 92, 180, .80);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #ec4899, #8b5cf6);
+        }
+
+        .ai-logo[data-ai="Meshy"] {
+            --avatar-glow: rgba(34, 211, 238, .82);
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.20), transparent 30%),
+                linear-gradient(135deg, #06b6d4, #2563eb);
+        }
+
+        .ai-logo:hover img {
+            filter: drop-shadow(0 0 12px var(--avatar-glow, rgba(255,255,255,.55)));
+        }
+
+        .ai-logo .fallback-icon {
+            position: relative;
+            z-index: 2;
+            font-size: 29px;
+            line-height: 1;
+        }
+
+        .ai-card:hover .ai-logo {
+            transform: translateY(-6px) scale(1.08) rotate(-1deg);
+            box-shadow:
+                0 16px 40px rgba(6,182,212,.24),
+                0 0 35px rgba(124,58,237,.25);
+        }
+
+        .ai-card:hover .ai-logo img,
+        .ai-card:hover .ai-logo .fallback-icon {
+            transform: scale(1.12) rotate(3deg);
+        }
+
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @keyframes avatarShine {
+            0%, 55% { transform: translateX(-65%) rotate(15deg); }
+            100% { transform: translateX(65%) rotate(15deg); }
+        }
+
+        /* =========================
+           INTERACTIVE ENDER DRAGON
+        ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dragon-stage {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        #dragonCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dragon-button {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 900;
+            width: 58px;
+            height: 58px;
+            border: 1px solid rgba(167,139,250,.35);
+            border-radius: 18px;
+            background: rgba(15,23,42,.78);
+            color: #fff;
+            cursor: pointer;
+            font-size: 27px;
+            box-shadow: 0 12px 35px rgba(0,0,0,.28);
+            backdrop-filter: blur(14px);
+            transition: .3s ease;
+        }
+
+        .dragon-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 16px 45px rgba(124,58,237,.28);
+        }
+
+        .dragon-button:active {
+            transform: scale(.94);
+        }
+
+        .ai-card,
+        .process-card,
+        .vibe-card,
+        .component-info {
+            transform-style: preserve-3d;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ai-logo,
+            .ai-logo::before {
+                animation: none !important;
+            }
         }
 
         .ai-card h3 {
@@ -922,7 +1097,479 @@
             }
 
         }
-    </style>
+    
+        .site-credits {
+            margin: 35px auto 8px;
+            max-width: 900px;
+            padding: 18px 22px;
+            text-align: center;
+            border-top: 1px solid rgba(148, 163, 184, .14);
+            color: #94a3b8;
+            animation: creditsFadeIn 1.2s ease both;
+        }
+
+        .credits-title {
+            color: #e2e8f0;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 9px;
+            letter-spacing: .3px;
+        }
+
+        .credits-note {
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .credits-note strong {
+            color: #a78bfa;
+        }
+
+        @keyframes creditsFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================
+           VIBE 2.0 — INTERACTIVE LAYER
+        ========================= */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            cursor: default;
+        }
+
+        .vibe-particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .vibe-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(167,139,250,.65);
+            box-shadow: 0 0 12px rgba(167,139,250,.55);
+            animation: particleDrift linear infinite;
+        }
+
+        @keyframes particleDrift {
+            from { transform: translate3d(0, 110vh, 0); opacity: 0; }
+            15% { opacity: .8; }
+            80% { opacity: .55; }
+            to { transform: translate3d(80px, -15vh, 0); opacity: 0; }
+        }
+
+        .lab-section {
+            position: relative;
+            margin-top: 80px;
+            padding: 70px 0;
+            border-top: 1px solid rgba(148,163,184,.12);
+        }
+
+        .lab-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 34px;
+        }
+
+        .lab-header h2 {
+            margin-bottom: 12px;
+        }
+
+        .lab-header p {
+            color: #94a3b8;
+        }
+
+        .lab-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .lab-tab {
+            border: 1px solid rgba(167,139,250,.18);
+            background: rgba(15,23,42,.55);
+            color: #cbd5e1;
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .lab-tab:hover,
+        .lab-tab.active {
+            color: white;
+            border-color: rgba(167,139,250,.55);
+            background: rgba(124,58,237,.18);
+            transform: translateY(-2px);
+        }
+
+        .lab-panel {
+            max-width: 1000px;
+            min-height: 330px;
+            margin: 0 auto;
+            padding: 28px;
+            border: 1px solid rgba(148,163,184,.14);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(124,58,237,.10), transparent 35%),
+                rgba(8,11,22,.58);
+            box-shadow: 0 20px 70px rgba(0,0,0,.22);
+            backdrop-filter: blur(16px);
+        }
+
+        .lab-demo {
+            display: none;
+            animation: labIn .45s ease both;
+        }
+
+        .lab-demo.active {
+            display: block;
+        }
+
+        @keyframes labIn {
+            from { opacity: 0; transform: translateY(10px) scale(.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .ai-modal,
+        .pc-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(2,6,23,.72);
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-modal.open,
+        .pc-modal.open {
+            display: flex;
+            animation: modalIn .25s ease both;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-card {
+            width: min(680px, 100%);
+            max-height: 85vh;
+            overflow: auto;
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(167,139,250,.25);
+            background: #0b1020;
+            box-shadow: 0 30px 100px rgba(0,0,0,.5);
+            position: relative;
+            animation: modalCardIn .3s ease both;
+        }
+
+        @keyframes modalCardIn {
+            from { transform: translateY(18px) scale(.97); }
+            to { transform: translateY(0) scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid rgba(148,163,184,.15);
+            background: rgba(30,41,59,.65);
+            color: #cbd5e1;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .ai-card {
+            cursor: pointer;
+        }
+
+        .ai-detail-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ai-detail-avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            font-size: 30px;
+            background: linear-gradient(135deg,#7c3aed,#06b6d4);
+            box-shadow: 0 0 30px rgba(124,58,237,.22);
+        }
+
+        .ai-detail-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .ai-detail-tag {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: rgba(124,58,237,.12);
+            border: 1px solid rgba(124,58,237,.2);
+            color: #c4b5fd;
+            font-size: 12px;
+        }
+
+        .score-box {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: clamp(64px, 12vw, 110px);
+            line-height: 1;
+            font-weight: 900;
+            background: linear-gradient(135deg,#a78bfa,#22d3ee,#f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+
+        .score-bar {
+            height: 13px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(148,163,184,.10);
+            border: 1px solid rgba(148,163,184,.12);
+        }
+
+        .score-fill {
+            height: 100%;
+            width: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg,#7c3aed,#06b6d4,#ec4899);
+            transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .score-item {
+            padding: 15px;
+            border-radius: 16px;
+            background: rgba(15,23,42,.7);
+            border: 1px solid rgba(148,163,184,.12);
+        }
+
+        .score-item b {
+            display: block;
+            font-size: 24px;
+            color: #f8fafc;
+            margin-top: 5px;
+        }
+
+        .vibe-input {
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+            box-sizing: border-box;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(148,163,184,.16);
+            background: rgba(2,6,23,.62);
+            color: #e2e8f0;
+            outline: none;
+            font: inherit;
+        }
+
+        .vibe-input:focus {
+            border-color: rgba(167,139,250,.55);
+            box-shadow: 0 0 0 4px rgba(124,58,237,.08);
+        }
+
+        .vibe-action {
+            margin-top: 12px;
+            border: 0;
+            border-radius: 13px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg,#7c3aed,#0891b2);
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .vibe-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124,58,237,.25);
+        }
+
+        .idea-output {
+            margin-top: 18px;
+            display: none;
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(15,23,42,.65);
+            border: 1px solid rgba(34,211,238,.14);
+        }
+
+        .idea-output.show {
+            display: block;
+            animation: labIn .35s ease both;
+        }
+
+        .idea-output pre {
+            white-space: pre-wrap;
+            margin: 0;
+            color: #cbd5e1;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            line-height: 1.65;
+        }
+
+        .pc-builder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .builder-slots {
+            display: grid;
+            gap: 10px;
+        }
+
+        .builder-slot {
+            padding: 15px;
+            border: 1px dashed rgba(167,139,250,.24);
+            border-radius: 14px;
+            color: #94a3b8;
+            background: rgba(15,23,42,.45);
+            transition: .2s ease;
+        }
+
+        .builder-slot.filled {
+            border-style: solid;
+            color: #e2e8f0;
+            background: rgba(124,58,237,.10);
+        }
+
+        .builder-parts {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 10px;
+        }
+
+        .builder-part {
+            border: 1px solid rgba(148,163,184,.14);
+            border-radius: 14px;
+            background: rgba(15,23,42,.7);
+            color: #cbd5e1;
+            padding: 15px;
+            cursor: grab;
+            user-select: none;
+            transition: .2s ease;
+        }
+
+        .builder-part:hover {
+            transform: translateY(-3px);
+            border-color: rgba(167,139,250,.35);
+        }
+
+        .builder-part.used {
+            opacity: .35;
+        }
+
+        .builder-result {
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 13px;
+            background: rgba(34,197,94,.08);
+            border: 1px solid rgba(34,197,94,.16);
+            color: #86efac;
+            display: none;
+        }
+
+        .builder-result.show {
+            display: block;
+        }
+
+        .konami-toast {
+            position: fixed;
+            left: 50%;
+            top: 24px;
+            z-index: 1200;
+            transform: translate(-50%,-30px);
+            opacity: 0;
+            pointer-events: none;
+            padding: 14px 20px;
+            border-radius: 999px;
+            color: white;
+            background: linear-gradient(135deg,rgba(124,58,237,.92),rgba(8,145,178,.92));
+            border: 1px solid rgba(255,255,255,.18);
+            box-shadow: 0 18px 50px rgba(0,0,0,.35);
+            transition: .4s ease;
+            font-weight: 800;
+        }
+
+        .konami-toast.show {
+            opacity: 1;
+            transform: translate(-50%,0);
+        }
+.sound-toggle:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 760px) {
+            .score-grid,
+            .pc-builder {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .builder-parts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .score-grid,
+            .pc-builder {
+                grid-template-columns: 1fr;
+            }
+
+            .lab-panel {
+                padding: 18px;
+            }
+}
+
+</style>
 </head>
 
 
@@ -960,7 +1607,10 @@
 
 <section class="hero">
 
-    <div class="hero-content">
+        <div class="dragon-stage" aria-hidden="true">
+        <canvas id="dragonCanvas"></canvas>
+    </div>
+<div class="hero-content">
 
         <span class="badge">
             ⚡ CODE • AI • CREATIVITY
@@ -1250,7 +1900,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="ChatGPT">
                 AI
             </div>
 
@@ -1277,7 +1927,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="Claude">
                 C
             </div>
 
@@ -1304,7 +1954,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="Gemini">
                 G
             </div>
 
@@ -1331,7 +1981,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="GitHub Copilot">
                 GH
             </div>
 
@@ -1359,7 +2009,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="Cursor">
                 →
             </div>
 
@@ -1387,7 +2037,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="Rosebud AI">
                 🎮
             </div>
 
@@ -1414,7 +2064,7 @@
 
         <div class="ai-card">
 
-            <div class="ai-logo">
+            <div class="ai-logo" data-ai="Meshy">
                 3D
             </div>
 
@@ -1705,6 +2355,77 @@
         Авторы сайта: И.К — Д.П
     </p>
 
+
+        <section class="lab-section" id="vibe-lab">
+            <div class="lab-header">
+                <div class="section-label">🧪 VIBE LAB</div>
+                <h2>Интерактивная лаборатория</h2>
+                <p>Потестируй маленькие эксперименты прямо на сайте.</p>
+            </div>
+
+            <div class="lab-tabs">
+                <button class="lab-tab active" data-lab="score">⚡ Vibe Score</button>
+                <button class="lab-tab" data-lab="idea">🧠 Idea Generator</button>
+                <button class="lab-tab" data-lab="pc">🖥️ PC Builder</button>
+            </div>
+
+            <div class="lab-panel">
+                <div class="lab-demo active" id="lab-score">
+                    <div class="score-box">
+                        <div class="section-label">LIVE SHOWCASE</div>
+                        <div class="score-number" id="scoreNumber">0</div>
+                        <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
+                        <div class="score-grid">
+                            <div class="score-item">✨ Design<b>95</b></div>
+                            <div class="score-item">⚡ Interactive<b>94</b></div>
+                            <div class="score-item">🤖 AI<b>92</b></div>
+                            <div class="score-item">🎮 Fun<b>97</b></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-demo" id="lab-idea">
+                    <h3>🧠 Придумай проект</h3>
+                    <p style="color:#94a3b8">Напиши любую идею — генератор соберёт из неё концепт.</p>
+                    <textarea class="vibe-input" id="ideaInput" placeholder="Например: Minecraft-сервер с AI..."></textarea>
+                    <button class="vibe-action" id="generateIdea">Сгенерировать концепт</button>
+                    <div class="idea-output" id="ideaOutput">
+                        <pre id="ideaText"></pre>
+                    </div>
+                </div>
+
+                <div class="lab-demo" id="lab-pc">
+                    <h3>🖥️ Собери свой ПК</h3>
+                    <p style="color:#94a3b8">Перетащи компоненты в подходящие слоты.</p>
+                    <div class="pc-builder">
+                        <div class="builder-slots">
+                            <div class="builder-slot" data-type="CPU">⚙️ CPU — перетащи сюда</div>
+                            <div class="builder-slot" data-type="GPU">🎮 GPU — перетащи сюда</div>
+                            <div class="builder-slot" data-type="RAM">🧠 RAM — перетащи сюда</div>
+                            <div class="builder-slot" data-type="SSD">💾 SSD — перетащи сюда</div>
+                            <div class="builder-slot" data-type="PSU">⚡ PSU — перетащи сюда</div>
+                            <div class="builder-result" id="builderResult">✅ ПК успешно собран! VIBE BUILD COMPLETE.</div>
+                        </div>
+                        <div class="builder-parts">
+                            <div class="builder-part" draggable="true" data-type="CPU">⚙️ Ryzen / Intel CPU</div>
+                            <div class="builder-part" draggable="true" data-type="GPU">🎮 RTX GPU</div>
+                            <div class="builder-part" draggable="true" data-type="RAM">🧠 DDR5 RAM</div>
+                            <div class="builder-part" draggable="true" data-type="SSD">💾 NVMe SSD</div>
+                            <div class="builder-part" draggable="true" data-type="PSU">⚡ PSU</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="site-credits">
+            <div class="credits-title">Авторы сайта</div>
+            <div class="credits-note">
+                <div><strong>И.К — Илья</strong> — создатель, web-design — человек, придумавший сайт.</div>
+                <div><strong>Д.П — Даниил</strong> — web-design — придумал несколько важнейших идей и деталей сайта.</div>
+            </div>
+        </div>
+
 </footer>
 
 
@@ -1969,7 +2690,528 @@
 
     }
 
+
+    /* =========================
+       AI AVATARS
+    ========================= */
+
+    const aiAvatarSources = {
+        "ChatGPT": "https://cdn.simpleicons.org/openai/ffffff",
+        "Claude": "https://cdn.simpleicons.org/claude/ffffff",
+        "Gemini": "https://cdn.simpleicons.org/googlegemini/ffffff",
+        "GitHub Copilot": "https://cdn.simpleicons.org/githubcopilot/ffffff",
+        "Cursor": "https://cdn.simpleicons.org/cursor/ffffff",
+        "Rosebud AI": "https://cdn.simpleicons.org/rose/ffffff",
+        "Meshy": "https://cdn.simpleicons.org/meshy/ffffff"
+    };
+
+    const aiFallbacks = {
+        "ChatGPT": "✦",
+        "Claude": "C",
+        "Gemini": "✦",
+        "GitHub Copilot": "⌘",
+        "Cursor": "↗",
+        "Rosebud AI": "🎮",
+        "Meshy": "3D"
+    };
+
+    document.querySelectorAll(".ai-logo[data-ai]").forEach(logo => {
+        const name = logo.dataset.ai;
+        const img = document.createElement("img");
+        img.src = aiAvatarSources[name];
+        img.alt = name + " logo";
+        img.loading = "lazy";
+
+        img.onerror = () => {
+            logo.innerHTML = `<span class="fallback-icon">${aiFallbacks[name] || "AI"}</span>`;
+        };
+
+        logo.textContent = "";
+        logo.appendChild(img);
+    });
+
+    /* =========================
+       INTERACTIVE ENDER DRAGON
+       Block/pixel-style dragon drawn in canvas.
+    ========================= */
+
+    (() => {
+        const canvas = document.getElementById("dragonCanvas");
+        const hero = document.querySelector(".hero");
+        const button = document.getElementById("dragonButton");
+        if (!canvas || !hero) return;
+
+        const ctx = canvas.getContext("2d");
+        let width = 0, height = 0, dpr = 1, t = 0, last = performance.now();
+        const mouse = { x: .5, y: .5, active: false };
+        const particles = [];
+
+        function resize() {
+            const r = hero.getBoundingClientRect();
+            width = Math.max(1, r.width);
+            height = Math.max(1, r.height);
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function rect(x, y, w, h, color, alpha = 1) {
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+            ctx.globalAlpha = 1;
+        }
+
+        function particle(x, y, burst = false) {
+            const a = Math.random() * Math.PI * 2;
+            const speed = burst ? 2 + Math.random() * 5 : .3 + Math.random() * 1.1;
+            particles.push({
+                x, y,
+                vx: Math.cos(a) * speed,
+                vy: Math.sin(a) * speed,
+                life: burst ? 1 : .7,
+                size: burst ? 2 + Math.random() * 4 : 1 + Math.random() * 2
+            });
+        }
+
+        function drawDragon(cx, cy, scale) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.scale(scale, scale);
+            ctx.translate(0, Math.sin(t * 2.1) * 7);
+
+            const wing = Math.sin(t * 5) * 20;
+
+            const glow = ctx.createRadialGradient(0, 0, 10, 0, 0, 260);
+            glow.addColorStop(0, "rgba(124,58,237,.20)");
+            glow.addColorStop(1, "rgba(124,58,237,0)");
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(0, 0, 260, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#15152a";
+            ctx.strokeStyle = "rgba(167,139,250,.65)";
+            ctx.lineWidth = 2;
+
+            // Blocky wings
+            ctx.beginPath();
+            ctx.moveTo(-35,-10); ctx.lineTo(-130,-95-wing); ctx.lineTo(-190,-72+wing);
+            ctx.lineTo(-135,-35); ctx.lineTo(-205,-5); ctx.lineTo(-112,8);
+            ctx.lineTo(-52,28); ctx.closePath(); ctx.fill(); ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(35,-10); ctx.lineTo(130,-95+wing); ctx.lineTo(190,-72-wing);
+            ctx.lineTo(135,-35); ctx.lineTo(205,-5); ctx.lineTo(112,8);
+            ctx.lineTo(52,28); ctx.closePath(); ctx.fill(); ctx.stroke();
+
+            // Body / neck / head
+            rect(-62,-12,124,52,"#171827");
+            rect(-42,-25,84,72,"#20203a");
+            rect(-28,-31,56,84,"#292747");
+            rect(35,-35,38,78,"#1a1a2e");
+            rect(58,-54,30,66,"#24233e");
+            rect(75,-72,70,52,"#1b1b30");
+            rect(88,-84,48,18,"#292747");
+            rect(130,-63,30,18,"#141422");
+
+            // Horns
+            ctx.fillStyle = "#6b5ca8";
+            ctx.beginPath(); ctx.moveTo(94,-78); ctx.lineTo(82,-108); ctx.lineTo(105,-87); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(128,-80); ctx.lineTo(143,-108); ctx.lineTo(143,-77); ctx.fill();
+
+            // Purple eyes
+            rect(102,-60,10,7,"#a855f7");
+            rect(128,-60,10,7,"#a855f7");
+            rect(122,-39,30,6,"#07070d");
+
+            // Legs
+            rect(-48,35,20,42,"#151522");
+            rect(28,35,20,42,"#151522");
+            rect(68,24,17,43,"#151522");
+
+            // Tail
+            ctx.fillStyle = "#171827";
+            ctx.beginPath();
+            ctx.moveTo(-55,25); ctx.lineTo(-150,65); ctx.lineTo(-230,42);
+            ctx.lineTo(-160,76); ctx.lineTo(-85,54); ctx.closePath(); ctx.fill();
+            rect(-185,48,12,18,"#6b5ca8");
+            rect(-155,54,10,16,"#6b5ca8");
+            rect(-125,48,9,14,"#6b5ca8");
+
+            // Wing ribs
+            ctx.strokeStyle = "rgba(124,58,237,.7)";
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 4; i++) {
+                ctx.beginPath(); ctx.moveTo(-70-i*8,-2); ctx.lineTo(-145-i*12,-68-wing*(i/4)); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(70+i*8,-2); ctx.lineTo(145+i*12,-68+wing*(i/4)); ctx.stroke();
+            }
+
+            ctx.restore();
+        }
+
+        function burst() {
+            const r = hero.getBoundingClientRect();
+            const x = r.width * .74;
+            const y = r.height * .43;
+            for (let i = 0; i < 55; i++) particle(x, y, true);
+        }
+
+        function frame(now) {
+            const dt = Math.min((now - last) / 1000, .05);
+            last = now;
+            t += dt;
+            ctx.clearRect(0, 0, width, height);
+
+            const mx = mouse.active ? (mouse.x - .5) * 90 : 0;
+            const my = mouse.active ? (mouse.y - .5) * 45 : 0;
+            const x = width * .74 + mx;
+            const y = height * .43 + my;
+            const scale = Math.min(width / 1100, 1) * .78;
+
+            drawDragon(x, y, scale);
+
+            if (Math.random() < .35) {
+                particle(
+                    x + (Math.random()-.5) * 250 * scale,
+                    y + (Math.random()-.5) * 120 * scale
+                );
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += .025;
+                p.life -= dt;
+
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                rect(p.x, p.y, p.size, p.size, "#a855f7", p.life);
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        hero.addEventListener("mousemove", e => {
+            const r = hero.getBoundingClientRect();
+            mouse.x = (e.clientX-r.left)/r.width;
+            mouse.y = (e.clientY-r.top)/r.height;
+            mouse.active = true;
+        });
+
+        hero.addEventListener("mouseleave", () => mouse.active = false);
+
+        hero.addEventListener("click", e => {
+            const r = hero.getBoundingClientRect();
+            const dx = e.clientX-r.left-r.width*.74;
+            const dy = e.clientY-r.top-r.height*.43;
+            if (Math.hypot(dx,dy) < Math.min(r.width,r.height)*.25) burst();
+        });
+
+        button?.addEventListener("click", burst);
+        window.addEventListener("resize", resize);
+
+        resize();
+        requestAnimationFrame(frame);
+    })();
+
+    /* =========================
+       3D CARD HOVER
+    ========================= */
+
+    document.querySelectorAll(".ai-card, .process-card").forEach(card => {
+        card.addEventListener("mousemove", e => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX-r.left)/r.width-.5;
+            const y = (e.clientY-r.top)/r.height-.5;
+            card.style.transform =
+                `perspective(900px) rotateX(${-y*3}deg) rotateY(${x*3}deg) translateY(-7px)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "";
+        });
+    });
+
+
+    /* =========================
+       VIBE LAB TABS
+    ========================= */
+    document.querySelectorAll(".lab-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".lab-tab").forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".lab-demo").forEach(d => d.classList.remove("active"));
+
+            tab.classList.add("active");
+            const panel = document.getElementById("lab-" + tab.dataset.lab);
+            if (panel) panel.classList.add("active");
+
+            if (tab.dataset.lab === "score") animateScore();
+        });
+    });
+
+    function animateScore() {
+        const number = document.getElementById("scoreNumber");
+        const fill = document.getElementById("scoreFill");
+        if (!number || !fill) return;
+
+        const target = 94;
+        let current = 0;
+        const start = performance.now();
+
+        function tick(now) {
+            const p = Math.min((now - start) / 1000, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            current = Math.round(target * eased);
+            number.textContent = current;
+            fill.style.width = current + "%";
+            if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    }
+
+    animateScore();
+
+    /* =========================
+       IDEA GENERATOR
+    ========================= */
+    const ideaButton = document.getElementById("generateIdea");
+    const ideaInput = document.getElementById("ideaInput");
+    const ideaOutput = document.getElementById("ideaOutput");
+    const ideaText = document.getElementById("ideaText");
+
+    ideaButton?.addEventListener("click", () => {
+        const idea = ideaInput.value.trim() || "AI-проект";
+        const concept =
+`💡 ИДЕЯ
+${idea}
+
+🧠 КОНЦЕПЦИЯ
+Сделать интерактивный web-проект с AI, современной анимацией
+и понятным интерфейсом.
+
+⚙️ ОСНОВА
+• HTML / CSS / JavaScript
+• Адаптивный дизайн
+• Анимации и микровзаимодействия
+• Интерактивные элементы
+
+🚀 VIBE-ФИЧИ
+• AI-инструменты
+• Пасхалки
+• Динамический фон
+• Мини-игры
+• Интерактивные карточки
+
+✨ NEXT STEP
+Превратить идею в рабочий прототип и постепенно добавлять
+реальные API и функциональность.`;
+
+        ideaText.textContent = concept;
+        ideaOutput.classList.add("show");
+    });
+
+    /* =========================
+       PC BUILDER
+    ========================= */
+    let draggedType = null;
+
+    document.querySelectorAll(".builder-part").forEach(part => {
+        part.addEventListener("dragstart", () => {
+            draggedType = part.dataset.type;
+            part.classList.add("used");
+        });
+
+        part.addEventListener("dragend", () => {
+            setTimeout(() => part.classList.remove("used"), 200);
+        });
+    });
+
+    document.querySelectorAll(".builder-slot").forEach(slot => {
+        slot.addEventListener("dragover", e => e.preventDefault());
+
+        slot.addEventListener("drop", () => {
+            if (!draggedType || draggedType !== slot.dataset.type) {
+                slot.animate(
+                    [{ transform:"translateX(0)" },{ transform:"translateX(-5px)" },{ transform:"translateX(5px)" },{ transform:"translateX(0)" }],
+                    { duration:250 }
+                );
+                return;
+            }
+
+            slot.classList.add("filled");
+            slot.textContent = "✅ " + draggedType + " установлен";
+            slot.dataset.filled = "true";
+
+            const allFilled = [...document.querySelectorAll(".builder-slot")]
+                .every(s => s.dataset.filled === "true");
+
+            if (allFilled) {
+                document.getElementById("builderResult")?.classList.add("show");
+            }
+        });
+    });
+
+    /* =========================
+       AI MODALS
+    ========================= */
+    const aiInfo = {
+        "ChatGPT": {
+            icon: "✦",
+            text: "Универсальный AI-помощник для идей, текста, программирования, анализа и обучения.",
+            tags: ["Идеи", "Код", "Текст", "Обучение"]
+        },
+        "Claude": {
+            icon: "C",
+            text: "AI-инструмент, который удобно использовать для работы с текстом, анализом и большими объёмами информации.",
+            tags: ["Текст", "Анализ", "Документы"]
+        },
+        "Gemini": {
+            icon: "✦",
+            text: "AI-система Google для работы с текстом, кодом, изображениями и другими типами задач.",
+            tags: ["Google", "Мультимодальность", "Код"]
+        },
+        "GitHub Copilot": {
+            icon: "⌘",
+            text: "AI-помощник для программирования, встроенный в инструменты разработки.",
+            tags: ["Код", "IDE", "Разработка"]
+        },
+        "Cursor": {
+            icon: "↗",
+            text: "Редактор кода с AI-функциями, ориентированный на быстрый интерактивный workflow.",
+            tags: ["IDE", "Код", "Agent"]
+        },
+        "Rosebud AI": {
+            icon: "🎮",
+            text: "Инструменты AI для творческого процесса и создания игровых/визуальных проектов.",
+            tags: ["Game Dev", "Creative", "AI"]
+        },
+        "Meshy": {
+            icon: "3D",
+            text: "Инструменты для генерации и работы с 3D-контентом с помощью AI.",
+            tags: ["3D", "Models", "Creative"]
+        }
+    };
+
+    const aiModal = document.getElementById("aiModal");
+
+    document.querySelectorAll(".ai-card").forEach(card => {
+        card.addEventListener("click", e => {
+            if (e.target.closest("a, button")) return;
+
+            const title = card.querySelector("h3")?.textContent.trim();
+            const data = aiInfo[title];
+            if (!data || !aiModal) return;
+
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalDescription").textContent = data.text;
+            document.getElementById("modalAvatar").textContent = data.icon;
+            document.getElementById("modalTags").innerHTML =
+                data.tags.map(tag => `<span class="ai-detail-tag">${tag}</span>`).join("");
+
+            aiModal.classList.add("open");
+        });
+    });
+
+    document.querySelectorAll("[data-close]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.getElementById(btn.dataset.close)?.classList.remove("open");
+        });
+    });
+
+    [aiModal].forEach(modal => {
+        modal?.addEventListener("click", e => {
+            if (e.target === modal) modal.classList.remove("open");
+        });
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
+            document.querySelectorAll(".ai-modal,.pc-modal").forEach(m => m.classList.remove("open"));
+        }
+    });
+
+    /* =========================
+       PARTICLE BACKGROUND
+    ========================= */
+    (() => {
+        const root = document.getElementById("vibeParticles");
+        if (!root) return;
+
+        const count = window.innerWidth < 700 ? 22 : 42;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement("span");
+            p.className = "vibe-particle";
+            p.style.left = Math.random() * 100 + "%";
+            p.style.animationDuration = (9 + Math.random() * 15) + "s";
+            p.style.animationDelay = (-Math.random() * 18) + "s";
+            p.style.opacity = (.25 + Math.random() * .5).toFixed(2);
+            p.style.transform = `scale(${.5 + Math.random() * 1.5})`;
+            root.appendChild(p);
+        }
+    })();
+/* =========================
+       KONAMI CODE EASTER EGG
+    ========================= */
+    const konami = [
+        "ArrowUp","ArrowUp","ArrowDown","ArrowDown",
+        "ArrowLeft","ArrowRight","ArrowLeft","ArrowRight",
+        "b","a"
+    ];
+    let konamiIndex = 0;
+
+    document.addEventListener("keydown", e => {
+        if (e.key === konami[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konami.length) {
+                konamiIndex = 0;
+                const toast = document.getElementById("konamiToast");
+                toast?.classList.add("show");
+                document.body.animate(
+                    [{ filter:"hue-rotate(0deg)" },{ filter:"hue-rotate(35deg)" },{ filter:"hue-rotate(0deg)" }],
+                    { duration:900 }
+                );
+                setTimeout(() => toast?.classList.remove("show"), 2600);
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+
+    /* Lab shortcut */
+    document.querySelectorAll('a[href="#vibe-lab"]').forEach(a => {
+        a.addEventListener("click", () => setTimeout(animateScore, 300));
+    });
+
 </script>
+
+<button class="dragon-button" id="dragonButton" type="button" title="Призвать дракона" aria-label="Призвать дракона">🐉</button>
+
+
+<div class="vibe-particles" id="vibeParticles" aria-hidden="true"></div>
+
+<div class="konami-toast" id="konamiToast">⚡ VIBE MODE ACTIVATED</div>
+
+<div class="ai-modal" id="aiModal">
+    <div class="modal-card">
+        <button class="modal-close" data-close="aiModal">×</button>
+        <div class="ai-detail-head">
+            <div class="ai-detail-avatar" id="modalAvatar">✦</div>
+            <div>
+                <div class="section-label">AI TOOL</div>
+                <h2 id="modalTitle" style="margin:4px 0">AI</h2>
+            </div>
+        </div>
+        <p id="modalDescription" style="color:#cbd5e1;line-height:1.7"></p>
+        <div class="ai-detail-tags" id="modalTags"></div>
+        <button class="vibe-action" data-close="aiModal">Закрыть</button>
+    </div>
+</div>
 
 </body>
 </html>
