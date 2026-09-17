@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIBE.CODE — Вайб-кодинг</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(124, 58, 237, .20), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(6, 182, 212, .15), transparent 30%),
+                #080b16;
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(8, 11, 22, .82);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            background: linear-gradient(
+                90deg,
+                #a78bfa,
+                #22d3ee
+            );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 25px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #22d3ee;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 85vh;
+
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 100px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 16px;
+            margin-bottom: 25px;
+
+            border-radius: 30px;
+
+            color: #c4b5fd;
+
+            background: rgba(124,58,237,.12);
+            border: 1px solid rgba(167,139,250,.3);
+        }
+
+        h1 {
+            font-size: clamp(50px, 9vw, 100px);
+
+            line-height: .95;
+
+            margin-bottom: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #a78bfa,
+                    #22d3ee
+                );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #aab4c8;
+
+            font-size: 20px;
+            line-height: 1.7;
+
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+
+            border: none;
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 10px 30px rgba(6,182,212,.18);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 90px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 42px;
+
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            max-width: 720px;
+
+            margin: 0 auto 50px;
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           VIBE CARD
+        ========================= */
+
+        .vibe-card {
+            padding: 40px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.025)
+                );
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.25);
+        }
+
+        .vibe-card h3 {
+            color: #67e8f9;
+
+            font-size: 27px;
+
+            margin-bottom: 18px;
+        }
+
+        .vibe-card p {
+            color: #cbd5e1;
+
+            line-height: 1.8;
+
+            margin-bottom: 15px;
+        }
+
+        #description {
+            display: none;
+
+            margin-top: 25px;
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background: rgba(6,182,212,.06);
+
+            border-left: 4px solid #22d3ee;
+
+            animation: appear .4s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .process-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .process-card {
+            position: relative;
+
+            min-height: 340px;
+
+            padding: 25px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.06),
+                    rgba(255,255,255,.025)
+                );
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            transition: .35s;
+        }
+
+        .process-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(34,211,238,.5);
+
+            box-shadow:
+                0 20px 50px rgba(34,211,238,.12);
+        }
+
+        .process-number {
+            position: absolute;
+
+            top: 18px;
+            right: 20px;
+
+            color: rgba(255,255,255,.18);
+
+            font-size: 45px;
+            font-weight: 900;
+        }
+
+        .process-icon {
+            height: 170px;
+
+            margin-bottom: 25px;
+
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 70px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(34,211,238,.15),
+                    rgba(124,58,237,.08),
+                    transparent
+                );
+
+            border: 1px solid rgba(255,255,255,.06);
+        }
+
+        .process-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .process-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .click-hint {
+            display: block;
+
+            margin-top: 15px;
+
+            color: #22d3ee;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           PROCESS INFO
+        ========================= */
+
+        #processInfo {
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(34,211,238,.05);
+
+            border:
+                1px solid rgba(34,211,238,.2);
+
+            animation: appear .4s ease;
+        }
+
+        #processInfo h3 {
+            color: #67e8f9;
+            margin-bottom: 15px;
+            font-size: 27px;
+        }
+
+        #processInfo p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           AI TOOLS
+        ========================= */
+
+        .ai-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .ai-card {
+            padding: 25px;
+
+            min-height: 240px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            transition: .3s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(167,139,250,.5);
+        }
+
+        .ai-logo {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+            font-weight: 900;
+
+            margin-bottom: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #06b6d4
+                );
+        }
+
+        .ai-card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .ai-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .tag {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            color: #67e8f9;
+
+            background:
+                rgba(34,211,238,.08);
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           PC
+        ========================= */
+
+        .pc-layout {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        /*
+            НОВЫЙ КОРПУС ПК
+
+            Здесь специально используется grid,
+            поэтому детали больше НЕ НАЛЕЗАЮТ
+            друг на друга.
+        */
+
+        .pc-case {
+            width: 390px;
+            height: 570px;
+
+            margin: auto;
+
+            padding: 22px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #050812
+                );
+
+            border:
+                3px solid #26354d;
+
+            box-shadow:
+                0 0 60px rgba(34,211,238,.1),
+                inset 0 0 50px rgba(255,255,255,.025);
+        }
+
+        .pc-glass {
+            width: 100%;
+            height: 100%;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    160deg,
+                    rgba(15,23,42,.95),
+                    rgba(8,11,22,.98)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            grid-template-rows:
+                150px
+                120px
+                100px
+                80px;
+
+            gap: 14px;
+
+            overflow: hidden;
+        }
+
+        .component {
+            min-width: 0;
+            min-height: 0;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111c31,
+                    #0c1425
+                );
+
+            border:
+                2px solid #075f78;
+
+            color: #67e8f9;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            padding: 10px;
+        }
+
+        .component:hover {
+            transform: scale(1.03);
+
+            border-color: #22d3ee;
+
+            box-shadow:
+                0 0 25px rgba(34,211,238,.25);
+        }
+
+        .component.active {
+            border-color: #22d3ee;
+
+            box-shadow:
+                0 0 30px rgba(34,211,238,.35);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #10253c,
+                    #0d1729
+                );
+        }
+
+        /*
+            Раскладка комплектующих.
+            Никаких абсолютных координат.
+        */
+
+        .motherboard {
+            grid-column: 1 / 3;
+            grid-row: 1;
+        }
+
+        .cpu {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .ram {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .gpu {
+            grid-column: 1 / 3;
+            grid-row: 3;
+        }
+
+        .storage {
+            grid-column: 1;
+            grid-row: 4;
+        }
+
+        .cooling {
+            grid-column: 2;
+            grid-row: 4;
+        }
+
+        .psu {
+            grid-column: 1 / 3;
+            grid-row: 5;
+
+            display: none;
+        }
+
+        /*
+            Информация о деталях
+        */
+
+        .component-info {
+            min-height: 350px;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .component-info h3 {
+            color: #67e8f9;
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .component-info p {
+            color: #cbd5e1;
+
+            line-height: 1.8;
+        }
+
+        .component-info .hint {
+            margin-top: 25px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .terminal {
+            background: #05070d;
+
+            border:
+                1px solid #1e293b;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.35);
+        }
+
+        .terminal-header {
+            padding: 14px 18px;
+
+            background: #0f172a;
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ef4444;
+        }
+
+        .yellow {
+            background: #eab308;
+        }
+
+        .green {
+            background: #22c55e;
+        }
+
+        .terminal-body {
+            padding: 30px;
+
+            font-family: monospace;
+
+            line-height: 2;
+
+            color: #67e8f9;
+        }
+
+        .prompt {
+            color: #a78bfa;
+        }
+
+        /* =========================
+           AUTHOR
+        ========================= */
+
+        .author-section {
+            text-align: center;
+
+            padding:
+                80px 20px
+                100px;
+        }
+
+        .author-box {
+            max-width: 700px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.1),
+                    rgba(6,182,212,.06)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .author-box h2 {
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+        .author-name {
+            font-size: 25px;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #a78bfa,
+                    #22d3ee
+                );
+
+            -webkit-background-clip: text;
+
+            color: transparent;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            border-top:
+                1px solid rgba(255,255,255,.06);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 900px) {
+
+            .process-grid,
+            .ai-grid,
+            .pc-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .pc-case {
+                width: min(390px, 92vw);
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            nav {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 34px;
+            }
+
+            .vibe-card {
+                padding: 25px;
+            }
+
+            .process-card {
+                min-height: 300px;
+            }
+
+            .pc-case {
+                height: 500px;
+                padding: 15px;
+            }
+
+            .pc-glass {
+                padding: 14px;
+
+                grid-template-rows:
+                    120px
+                    95px
+                    90px
+                    75px;
+            }
+
+            .component {
+                font-size: 12px;
+            }
+
+            .component-info {
+                padding: 25px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+            VIBE.CODE
+        </div>
+
+        <nav>
+            <a href="#vibe">Вайб-кодинг</a>
+            <a href="#process">Как работает</a>
+            <a href="#ai">AI</a>
+            <a href="#pc">ПК</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            ⚡ CODE • AI • CREATIVITY
+        </span>
+
+        <h1>
+            Vibe Coding
+        </h1>
+
+        <p>
+            Современный подход к созданию сайтов,
+            приложений и игр с помощью человеческих идей
+            и искусственного интеллекта.
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="btn btn-primary"
+                onclick="document.getElementById('vibe').scrollIntoView()">
+
+                Что такое вайб-кодинг?
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="document.getElementById('pc').scrollIntoView()">
+
+                Исследовать ПК
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VIBE CODING
+========================= -->
+
+<section id="vibe">
+
+    <h2 class="section-title">
+        Что такое вайб-кодинг?
+    </h2>
+
+    <p class="section-subtitle">
+
+        Ты объясняешь AI, что хочешь получить,
+        а искусственный интеллект помогает превратить
+        идею в работающий код.
+
+    </p>
+
+
+    <div class="vibe-card">
+
+        <h3>
+            💡 Простыми словами
+        </h3>
+
+        <p>
+
+            Вайб-кодинг — это подход к разработке,
+            при котором человек формулирует задачу
+            обычным языком, а AI помогает создавать,
+            изменять и объяснять программный код.
+
+        </p>
+
+        <p>
+
+            Например, вместо того чтобы вручную
+            писать сотни строк HTML, CSS и JavaScript,
+            можно описать AI желаемый результат:
+
+            <strong>
+                «Сделай современный сайт с тёмной темой,
+                красивыми карточками и интерактивными кнопками».
+            </strong>
+
+        </p>
+
+
+        <button
+            class="btn btn-primary"
+            onclick="toggleDescription()">
+
+            Описание
+
+        </button>
+
+
+        <div id="description">
+
+            <h3>
+                📖 Подробное описание
+            </h3>
+
+            <p>
+
+                Вайб-кодинг строится на итеративном процессе:
+                человек формулирует задачу, AI предлагает
+                реализацию, человек проверяет результат,
+                а затем просит внести изменения.
+
+            </p>
+
+            <p>
+
+                Такой подход позволяет быстрее создавать
+                прототипы сайтов, интерфейсы, небольшие
+                приложения, автоматизацию и экспериментальные
+                проекты.
+
+            </p>
+
+            <p>
+
+                При этом полезно понимать код и проверять
+                результат: AI может допускать ошибки,
+                поэтому разработчик остаётся человеком,
+                который принимает решения и контролирует проект.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HOW IT WORKS
+========================= -->
+
+<section id="process">
+
+    <h2 class="section-title">
+        Как работает вайб-кодинг?
+    </h2>
+
+    <p class="section-subtitle">
+
+        Нажми на любую карточку,
+        чтобы узнать подробнее.
+
+    </p>
+
+
+    <div class="process-grid">
+
+
+        <!-- IDEA -->
+
+        <div
+            class="process-card"
+            onclick="showProcess('idea')">
+
+            <span class="process-number">
+                01
+            </span>
+
+            <div class="process-icon">
+                💡
+            </div>
+
+            <h3>
+                Идея
+            </h3>
+
+            <p>
+                Сначала человек объясняет,
+                что он хочет создать.
+            </p>
+
+            <span class="click-hint">
+                Нажми, чтобы открыть →
+            </span>
+
+        </div>
+
+
+        <!-- AI -->
+
+        <div
+            class="process-card"
+            onclick="showProcess('ai')">
+
+            <span class="process-number">
+                02
+            </span>
+
+            <div class="process-icon">
+                🤖
+            </div>
+
+            <h3>
+                AI
+            </h3>
+
+            <p>
+                Искусственный интеллект
+                превращает описание в код.
+            </p>
+
+            <span class="click-hint">
+                Нажми, чтобы открыть →
+            </span>
+
+        </div>
+
+
+        <!-- IMPROVEMENT -->
+
+        <div
+            class="process-card"
+            onclick="showProcess('improve')">
+
+            <span class="process-number">
+                03
+            </span>
+
+            <div class="process-icon">
+                🔄
+            </div>
+
+            <h3>
+                Улучшение
+            </h3>
+
+            <p>
+                Ты проверяешь результат
+                и просишь внести изменения.
+            </p>
+
+            <span class="click-hint">
+                Нажми, чтобы открыть →
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div id="processInfo">
+
+        <h3 id="processTitle"></h3>
+
+        <p id="processText"></p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AI TOOLS
+========================= -->
+
+<section id="ai">
+
+    <h2 class="section-title">
+        🤖 AI для создания сайтов и игр
+    </h2>
+
+    <p class="section-subtitle">
+
+        Эти инструменты могут помогать с кодом,
+        интерфейсами, прототипами, игровыми механиками
+        и 3D-ассетами.
+
+    </p>
+
+
+    <div class="ai-grid">
+
+
+        <!-- CHATGPT -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                AI
+            </div>
+
+            <h3>
+                ChatGPT
+            </h3>
+
+            <p>
+
+                Помогает придумывать архитектуру,
+                писать HTML/CSS/JavaScript,
+                объяснять код и исправлять ошибки.
+
+            </p>
+
+            <span class="tag">
+                Сайты • Код • Идеи
+            </span>
+
+        </div>
+
+
+        <!-- CLAUDE -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                C
+            </div>
+
+            <h3>
+                Claude
+            </h3>
+
+            <p>
+
+                AI-помощник, который можно использовать
+                для анализа кода, разработки функций
+                и работы с большими фрагментами проекта.
+
+            </p>
+
+            <span class="tag">
+                Код • Проекты
+            </span>
+
+        </div>
+
+
+        <!-- GEMINI -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                G
+            </div>
+
+            <h3>
+                Gemini
+            </h3>
+
+            <p>
+
+                Может помогать с программированием,
+                генерацией идей и анализом материалов
+                проекта.
+
+            </p>
+
+            <span class="tag">
+                Код • Идеи • Анализ
+            </span>
+
+        </div>
+
+
+        <!-- COPILOT -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                GH
+            </div>
+
+            <h3>
+                GitHub Copilot
+            </h3>
+
+            <p>
+
+                AI-инструмент для разработки:
+                предлагает код, объясняет его,
+                помогает редактировать файлы
+                и выполнять задачи в проекте.
+
+            </p>
+
+            <span class="tag">
+                Программирование
+            </span>
+
+        </div>
+
+
+        <!-- CURSOR -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                →
+            </div>
+
+            <h3>
+                Cursor
+            </h3>
+
+            <p>
+
+                AI-редактор для разработки.
+                Можно описывать задачи естественным языком,
+                а Agent помогает исследовать проект
+                и изменять файлы.
+
+            </p>
+
+            <span class="tag">
+                Код • Agent
+            </span>
+
+        </div>
+
+
+        <!-- ROSEBUD -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                🎮
+            </div>
+
+            <h3>
+                Rosebud AI
+            </h3>
+
+            <p>
+
+                Инструмент, ориентированный на создание
+                игр с помощью AI и текстовых описаний.
+                Подходит для быстрых игровых прототипов.
+
+            </p>
+
+            <span class="tag">
+                Игры • Game Dev
+            </span>
+
+        </div>
+
+
+        <!-- MESHY -->
+
+        <div class="ai-card">
+
+            <div class="ai-logo">
+                3D
+            </div>
+
+            <h3>
+                Meshy
+            </h3>
+
+            <p>
+
+                AI-инструмент для создания 3D-моделей
+                и игровых ассетов из текста или изображений.
+                Может использоваться в игровых проектах.
+
+            </p>
+
+            <span class="tag">
+                3D • Игры • Assets
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TERMINAL
+========================= -->
+
+<section>
+
+    <h2 class="section-title">
+        Как выглядит вайб-кодинг?
+    </h2>
+
+    <p class="section-subtitle">
+
+        Например, разработчик может начать
+        не с кода, а с обычного человеческого запроса.
+
+    </p>
+
+
+    <div class="terminal">
+
+        <div class="terminal-header">
+
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+
+        </div>
+
+
+        <div class="terminal-body">
+
+            <div>
+                <span class="prompt">
+                    You:
+                </span>
+
+                Сделай современный сайт
+                о компьютерах.
+            </div>
+
+            <div>
+
+                <span class="prompt">
+                    AI:
+                </span>
+
+                Создаю структуру HTML...
+
+            </div>
+
+            <div>
+
+                <span class="prompt">
+                    You:
+                </span>
+
+                Добавь интерактивный ПК.
+
+            </div>
+
+            <div>
+
+                <span class="prompt">
+                    AI:
+                </span>
+
+                Добавляю интерактивные комплектующие ✓
+
+            </div>
+
+            <div>
+
+                <span class="prompt">
+                    You:
+                </span>
+
+                Сделай красивую анимацию.
+
+            </div>
+
+            <div>
+
+                <span class="prompt">
+                    AI:
+                </span>
+
+                Анимация добавлена ✓
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PC
+========================= -->
+
+<section id="pc">
+
+    <h2 class="section-title">
+        🖥️ Интерактивный ПК
+    </h2>
+
+    <p class="section-subtitle">
+
+        Теперь комплектующие расположены отдельно.
+        Нажимай на любую деталь внутри компьютера.
+
+    </p>
+
+
+    <div class="pc-layout">
+
+
+        <!-- PC -->
+
+        <div class="pc-case">
+
+            <div class="pc-glass">
+
+
+                <div
+                    class="component motherboard"
+                    onclick="showPart('motherboard', this)">
+
+                    🧩 Материнская плата
+
+                </div>
+
+
+                <div
+                    class="component cpu"
+                    onclick="showPart('cpu', this)">
+
+                    🧠 CPU
+
+                </div>
+
+
+                <div
+                    class="component ram"
+                    onclick="showPart('ram', this)">
+
+                    ⚡ RAM
+
+                </div>
+
+
+                <div
+                    class="component gpu"
+                    onclick="showPart('gpu', this)">
+
+                    🎮 Видеокарта
+
+                </div>
+
+
+                <div
+                    class="component storage"
+                    onclick="showPart('storage', this)">
+
+                    💾 SSD
+
+                </div>
+
+
+                <div
+                    class="component cooling"
+                    onclick="showPart('cooling', this)">
+
+                    🌀 Охлаждение
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- INFO -->
+
+        <div
+            class="component-info"
+            id="componentInfo">
+
+            <h3>
+                🖥️ Выбери комплектующую
+            </h3>
+
+            <p>
+
+                Нажми на любую деталь внутри
+                компьютера, чтобы узнать,
+                что она делает и зачем нужна.
+
+            </p>
+
+            <p class="hint">
+
+                💡 Попробуй нажать на CPU,
+                видеокарту или SSD.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AUTHORS
+========================= -->
+
+<section class="author-section">
+
+    <div class="author-box">
+
+        <h2>
+            🚀 Конец проекта
+        </h2>
+
+        <p style="color:#94a3b8; margin-bottom:20px;">
+
+            Этот сайт посвящён вайб-кодингу,
+            искусственному интеллекту
+            и современным технологиям.
+
+        </p>
+
+        <div class="author-name">
+
+            Авторы сайта: И.К — Д.П
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        VIBE.CODE © 2026
+    </p>
+
+    <p style="margin-top:8px;">
+        Авторы сайта: И.К — Д.П
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* =========================
+       DESCRIPTION
+    ========================= */
+
+    function toggleDescription() {
+
+        const description =
+            document.getElementById("description");
+
+        if (
+            description.style.display === "block"
+        ) {
+
+            description.style.display = "none";
+
+        } else {
+
+            description.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =========================
+       PROCESS CARDS
+    ========================= */
+
+    const processData = {
+
+        idea: {
+
+            title: "💡 Идея — сначала объясни, что ты хочешь",
+
+            text:
+                "На первом этапе человек формулирует задачу " +
+                "обычным языком. Например: «Создай сайт " +
+                "для компьютерного клуба с тёмной темой, " +
+                "карточками и красивой анимацией». " +
+                "Чем понятнее требования, тем проще AI " +
+                "понять направление работы."
+
+        },
+
+        ai: {
+
+            title: "🤖 AI — превращаем идею в код",
+
+            text:
+                "AI анализирует запрос и может предложить " +
+                "HTML, CSS, JavaScript или другой код. " +
+                "Инструменты вроде ChatGPT, Claude, Gemini, " +
+                "GitHub Copilot и Cursor могут помогать " +
+                "с разными этапами разработки."
+
+        },
+
+        improve: {
+
+            title: "🔄 Улучшение — результат становится лучше",
+
+            text:
+                "После получения результата человек проверяет " +
+                "сайт или программу. Если что-то не нравится, " +
+                "можно попросить изменить дизайн, исправить " +
+                "ошибку, добавить функцию или переделать " +
+                "отдельный элемент. Затем процесс повторяется."
+
+        }
+
+    };
+
+
+    function showProcess(type) {
+
+        const box =
+            document.getElementById("processInfo");
+
+        const title =
+            document.getElementById("processTitle");
+
+        const text =
+            document.getElementById("processText");
+
+        title.textContent =
+            processData[type].title;
+
+        text.textContent =
+            processData[type].text;
+
+        box.style.display = "block";
+
+        box.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    }
+
+
+    /* =========================
+       PC COMPONENTS
+    ========================= */
+
+    const parts = {
+
+        motherboard: {
+
+            title:
+                "🧩 Материнская плата",
+
+            text:
+                "Материнская плата — это основная плата " +
+                "компьютера. Она соединяет процессор, " +
+                "оперативную память, накопители, видеокарту " +
+                "и другие компоненты в единую систему."
+
+        },
+
+
+        cpu: {
+
+            title:
+                "🧠 Процессор — CPU",
+
+            text:
+                "CPU выполняет инструкции программ " +
+                "и производит вычисления. Он используется " +
+                "практически во всех задачах компьютера: " +
+                "от запуска операционной системы до работы " +
+                "приложений и игр."
+
+        },
+
+
+        ram: {
+
+            title:
+                "⚡ Оперативная память — RAM",
+
+            text:
+                "RAM временно хранит данные, которые " +
+                "компьютер использует прямо сейчас. " +
+                "Например, открытые программы, вкладки " +
+                "браузера и данные работающих приложений."
+
+        },
+
+
+        gpu: {
+
+            title:
+                "🎮 Видеокарта — GPU",
+
+            text:
+                "GPU обрабатывает графические данные " +
+                "и помогает формировать изображение. " +
+                "Особенно важна для игр, 3D-графики, " +
+                "рендеринга и некоторых вычислительных задач."
+
+        },
+
+
+        storage: {
+
+            title:
+                "💾 SSD",
+
+            text:
+                "SSD хранит операционную систему, игры, " +
+                "программы, фотографии, видео и другие файлы. " +
+                "В отличие от оперативной памяти, данные " +
+                "на SSD сохраняются после выключения компьютера."
+
+        },
+
+
+        cooling: {
+
+            title:
+                "🌀 Охлаждение",
+
+            text:
+                "Система охлаждения помогает отводить тепло " +
+                "от компонентов компьютера. В неё могут входить " +
+                "вентиляторы, радиаторы и другие элементы. " +
+                "Правильное охлаждение помогает поддерживать " +
+                "рабочую температуру компонентов."
+
+        }
+
+    };
+
+
+    function showPart(
+        partName,
+        element
+    ) {
+
+        const info =
+            document.getElementById(
+                "componentInfo"
+            );
+
+        const part =
+            parts[partName];
+
+
+        /* Убираем активность */
+
+        document
+            .querySelectorAll(".component")
+            .forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+        /* Подсвечиваем выбранную */
+
+        element.classList.add("active");
+
+
+        /* Меняем информацию */
+
+        info.innerHTML = `
+
+            <h3>
+                ${part.title}
+            </h3>
+
+            <p>
+                ${part.text}
+            </p>
+
+            <p class="hint">
+
+                💡 Нажми на другую комплектующую,
+                чтобы посмотреть её описание.
+
+            </p>
+
+        `;
+
+
+        /* Анимация */
+
+        info.style.animation = "none";
+
+        setTimeout(() => {
+
+            info.style.animation =
+                "appear .4s ease";
+
+        }, 10);
+
+    }
+
+</script>
+
+</body>
+</html>
